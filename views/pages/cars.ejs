@@ -1,0 +1,49 @@
+<%- include('../partials/header') %>
+
+<section class="listing-hero bg-light">
+  <div class="container text-center">
+    <h1>Available Cars</h1>
+    <p>Browse our selection of premium vehicles available for your next adventure</p>
+    <form class="listing-search" action="/cars" method="get">
+      <i class="bi bi-search"></i>
+      <input type="search" name="q" placeholder="Search by make, model, or features" value="<%= query.q || '' %>" aria-label="Search cars">
+      <input type="hidden" name="pickupLocation" value="<%= query.pickupLocation || '' %>">
+      <input type="hidden" name="pickupDate" value="<%= query.pickupDate || '' %>">
+      <input type="hidden" name="returnDate" value="<%= query.returnDate || '' %>">
+      <button class="icon-button" type="submit" aria-label="Filter cars"><i class="bi bi-sliders"></i></button>
+    </form>
+  </div>
+</section>
+
+<section class="section-pad">
+  <div class="container">
+    <% if (query.pickupLocation && query.pickupDate && query.returnDate) { %>
+      <div class="search-summary">
+        <i class="bi bi-calendar2-check"></i>
+        <span><%= query.pickupLocation %>, <%= helpers.formatDate(query.pickupDate) %> to <%= helpers.formatDate(query.returnDate) %></span>
+        <a href="/cars">Clear</a>
+      </div>
+    <% } %>
+
+    <p class="text-secondary mb-4">Showing <%= cars.length %> Cars</p>
+
+    <% if (cars.length) { %>
+      <div class="row g-4">
+        <% cars.forEach((car) => { %>
+          <div class="col-md-6 col-xl-4">
+            <%- include('../partials/car-card', { car }) %>
+          </div>
+        <% }) %>
+      </div>
+    <% } else { %>
+      <div class="empty-state">
+        <i class="bi bi-car-front"></i>
+        <h2>No cars found</h2>
+        <p>Try another city, date range, or search term.</p>
+        <a class="btn btn-primary" href="/cars">Reset search</a>
+      </div>
+    <% } %>
+  </div>
+</section>
+
+<%- include('../partials/footer') %>

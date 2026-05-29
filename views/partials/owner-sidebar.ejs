@@ -1,0 +1,15 @@
+<aside class="owner-sidebar">
+  <div class="owner-profile">
+    <div class="owner-avatar"><i class="bi bi-person"></i></div>
+    <div>
+      <strong><%= currentUser.name %></strong>
+      <span><%= currentUser.email %></span>
+    </div>
+  </div>
+  <nav class="owner-nav">
+    <a class="<%= currentPath === '/owner' ? 'active' : '' %>" href="/owner"><i class="bi bi-speedometer2"></i>Dashboard</a>
+    <a class="<%= currentPath === '/owner/add-car' ? 'active' : '' %>" href="/owner/add-car"><i class="bi bi-plus-square"></i>Add car</a>
+    <a class="<%= currentPath === '/owner/manage-cars' ? 'active' : '' %>" href="/owner/manage-cars"><i class="bi bi-car-front"></i>Manage Cars</a>
+    <a class="<%= currentPath === '/owner/manage-bookings' ? 'active' : '' %>" href="/owner/manage-bookings"><i class="bi bi-list-check"></i>Manage Bookings</a>
+  </nav>
+</aside>

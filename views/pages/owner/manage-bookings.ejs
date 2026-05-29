@@ -1,0 +1,59 @@
+<%- include('../../partials/header') %>
+
+<section class="owner-shell">
+  <div class="container-fluid px-0">
+    <div class="d-flex">
+      <%- include('../../partials/owner-sidebar') %>
+
+      <div class="owner-content">
+        <div class="owner-heading">
+          <h1>Manage Bookings</h1>
+          <p>Track all customer bookings, approve or cancel requests, and manage booking statuses.</p>
+        </div>
+
+        <div class="owner-table-wrap">
+          <table class="table owner-table align-middle mb-0">
+            <thead>
+              <tr>
+                <th>Car</th>
+                <th class="d-none d-lg-table-cell">Date Range</th>
+                <th>Total</th>
+                <th class="d-none d-md-table-cell">Payment</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% bookings.forEach((booking) => { %>
+                <tr>
+                  <td>
+                    <div class="table-car">
+                      <img src="<%= booking.car.image %>" alt="<%= booking.car.brand %> <%= booking.car.model %>">
+                      <div>
+                        <strong><%= booking.car.brand %> <%= booking.car.model %></strong>
+                        <span><%= booking.car.location %></span>
+                      </div>
+                    </div>
+                  </td>
+                  <td class="d-none d-lg-table-cell"><%= helpers.formatDate(booking.pickupDate) %> to <%= helpers.formatDate(booking.returnDate) %></td>
+                  <td><%= helpers.formatMoney(booking.price) %></td>
+                  <td class="d-none d-md-table-cell"><%= booking.paymentStatus %></td>
+                  <td>
+                    <div class="booking-status-control">
+                      <select class="form-select form-select-sm" data-booking-status="<%= booking.id %>" aria-label="Booking status">
+                        <% ['pending', 'confirmed', 'cancelled'].forEach((status) => { %>
+                          <option value="<%= status %>" <%= booking.status === status ? 'selected' : '' %>><%= status %></option>
+                        <% }) %>
+                      </select>
+                    </div>
+                  </td>
+                </tr>
+              <% }) %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<%- include('../../partials/footer') %>

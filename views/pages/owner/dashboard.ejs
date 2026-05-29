@@ -1,0 +1,86 @@
+<%- include('../../partials/header') %>
+
+<section class="owner-shell">
+  <div class="container-fluid px-0">
+    <div class="d-flex">
+      <%- include('../../partials/owner-sidebar') %>
+
+      <div class="owner-content">
+        <div class="owner-heading">
+          <h1>Dashboard</h1>
+          <p>Monitor your listed cars, customer bookings, and monthly rental revenue.</p>
+        </div>
+
+        <div class="row g-3 stats-grid">
+          <div class="col-md-6 col-xl-3">
+            <div class="stat-card">
+              <span><i class="bi bi-car-front"></i></span>
+              <div><strong><%= dashboard.totalCars %></strong><p>Total Cars</p></div>
+            </div>
+          </div>
+          <div class="col-md-6 col-xl-3">
+            <div class="stat-card">
+              <span><i class="bi bi-calendar2-check"></i></span>
+              <div><strong><%= dashboard.totalBookings %></strong><p>Total Bookings</p></div>
+            </div>
+          </div>
+          <div class="col-md-6 col-xl-3">
+            <div class="stat-card">
+              <span><i class="bi bi-hourglass-split"></i></span>
+              <div><strong><%= dashboard.pendingBookings %></strong><p>Pending</p></div>
+            </div>
+          </div>
+          <div class="col-md-6 col-xl-3">
+            <div class="stat-card">
+              <span><i class="bi bi-cash-coin"></i></span>
+              <div><strong><%= helpers.formatMoney(dashboard.monthlyRevenue) %></strong><p>Monthly Revenue</p></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row g-4 mt-2">
+          <div class="col-xl-8">
+            <div class="owner-panel">
+              <div class="panel-title">
+                <h2>Recent Bookings</h2>
+                <p>Latest customer bookings</p>
+              </div>
+
+              <% if (dashboard.recentBookings.length) { %>
+                <div class="recent-list">
+                  <% dashboard.recentBookings.forEach((booking) => { %>
+                    <div class="recent-item">
+                      <div class="recent-icon"><i class="bi bi-list-check"></i></div>
+                      <div>
+                        <strong><%= booking.car.brand %> <%= booking.car.model %></strong>
+                        <span><%= helpers.formatDate(booking.createdAt) %></span>
+                      </div>
+                      <div class="ms-auto text-end">
+                        <strong><%= helpers.formatMoney(booking.price) %></strong>
+                        <span class="badge <%= helpers.statusClass(booking.status) %> text-capitalize"><%= booking.status %></span>
+                      </div>
+                    </div>
+                  <% }) %>
+                </div>
+              <% } else { %>
+                <div class="owner-empty">No bookings yet.</div>
+              <% } %>
+            </div>
+          </div>
+
+          <div class="col-xl-4">
+            <div class="owner-panel revenue-panel">
+              <div class="panel-title">
+                <h2>Monthly Revenue</h2>
+                <p>Revenue for current month</p>
+              </div>
+              <strong><%= helpers.formatMoney(dashboard.monthlyRevenue) %></strong>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<%- include('../../partials/footer') %>

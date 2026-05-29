@@ -1,0 +1,38 @@
+<div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content auth-card">
+      <div class="modal-body p-4 p-md-5">
+        <button type="button" class="btn-close auth-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <h1 class="auth-title text-center mb-4"><span>User</span> <span data-auth-title>Login</span></h1>
+
+        <form id="authForm" data-mode="login">
+          <div class="mb-3 auth-name-field d-none">
+            <label class="form-label" for="authName">Name</label>
+            <input class="form-control" id="authName" name="name" placeholder="type here" autocomplete="name">
+          </div>
+          <div class="mb-3">
+            <label class="form-label" for="authEmail">Email</label>
+            <input class="form-control" id="authEmail" type="email" name="email" placeholder="type here" autocomplete="email" required>
+          </div>
+          <div class="mb-3">
+            <label class="form-label" for="authPassword">Password</label>
+            <input class="form-control" id="authPassword" type="password" name="password" placeholder="type here" autocomplete="current-password" required>
+          </div>
+
+          <p class="auth-switch mb-3">
+            <span data-auth-prompt>Create an account?</span>
+            <button type="button" class="link-button" data-auth-toggle>click here</button>
+          </p>
+
+          <div class="d-grid gap-2">
+            <button class="btn btn-primary" type="submit" data-auth-submit>Login</button>
+            <div class="row g-2 demo-actions">
+              <div class="col-6"><button class="btn btn-outline-secondary w-100" type="button" data-demo-login="customer">Customer demo</button></div>
+              <div class="col-6"><button class="btn btn-outline-secondary w-100" type="button" data-demo-login="owner">Owner demo</button></div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

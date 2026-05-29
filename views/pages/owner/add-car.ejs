@@ -1,0 +1,99 @@
+<%- include('../../partials/header') %>
+
+<section class="owner-shell">
+  <div class="container-fluid px-0">
+    <div class="d-flex">
+      <%- include('../../partials/owner-sidebar') %>
+
+      <div class="owner-content">
+        <div class="owner-heading">
+          <h1>Add New Car</h1>
+          <p>Fill in details to list a new car for booking, including pricing, availability, and car specifications.</p>
+        </div>
+
+        <form class="owner-form" data-add-car-form enctype="multipart/form-data">
+          <div class="upload-row">
+            <label class="upload-box" for="carImage">
+              <i class="bi bi-cloud-arrow-up"></i>
+              <span>Upload</span>
+            </label>
+            <input id="carImage" type="file" name="image" accept="image/*" hidden>
+            <div class="flex-grow-1">
+              <label class="form-label" for="imageUrl">Image URL</label>
+              <input class="form-control" id="imageUrl" name="imageUrl" placeholder="https://ik.imagekit.io/...">
+            </div>
+          </div>
+
+          <div class="row g-3">
+            <div class="col-md-6">
+              <label class="form-label" for="brand">Brand</label>
+              <input class="form-control" id="brand" name="brand" placeholder="e.g. BMW, Mercedes, Audi" required>
+            </div>
+            <div class="col-md-6">
+              <label class="form-label" for="model">Model</label>
+              <input class="form-control" id="model" name="model" placeholder="e.g. X5, E-Class, M4" required>
+            </div>
+            <div class="col-sm-4">
+              <label class="form-label" for="year">Year</label>
+              <input class="form-control" id="year" type="number" name="year" placeholder="2025" min="1980" required>
+            </div>
+            <div class="col-sm-4">
+              <label class="form-label" for="pricePerDay">Daily Price ($)</label>
+              <input class="form-control" id="pricePerDay" type="number" name="pricePerDay" placeholder="100" min="1" required>
+            </div>
+            <div class="col-sm-4">
+              <label class="form-label" for="category">Category</label>
+              <select class="form-select" id="category" name="category" required>
+                <option value="">Select a category</option>
+                <% categories.forEach((category) => { %>
+                  <option value="<%= category %>"><%= category %></option>
+                <% }) %>
+              </select>
+            </div>
+            <div class="col-md-4">
+              <label class="form-label" for="transmission">Transmission</label>
+              <select class="form-select" id="transmission" name="transmission" required>
+                <option value="">Select a transmission</option>
+                <% transmissions.forEach((transmission) => { %>
+                  <option value="<%= transmission %>"><%= transmission %></option>
+                <% }) %>
+              </select>
+            </div>
+            <div class="col-md-4">
+              <label class="form-label" for="fuel_type">Fuel Type</label>
+              <select class="form-select" id="fuel_type" name="fuel_type" required>
+                <option value="">Select a fuel type</option>
+                <% fuelTypes.forEach((fuel) => { %>
+                  <option value="<%= fuel %>"><%= fuel %></option>
+                <% }) %>
+              </select>
+            </div>
+            <div class="col-md-4">
+              <label class="form-label" for="seating_capacity">Seating Capacity</label>
+              <input class="form-control" id="seating_capacity" type="number" name="seating_capacity" placeholder="4" min="1" required>
+            </div>
+            <div class="col-md-6">
+              <label class="form-label" for="location">Location</label>
+              <select class="form-select" id="location" name="location" required>
+                <option value="">Select a location</option>
+                <% locations.forEach((location) => { %>
+                  <option value="<%= location %>"><%= location %></option>
+                <% }) %>
+              </select>
+            </div>
+            <div class="col-12">
+              <label class="form-label" for="description">Description</label>
+              <textarea class="form-control" id="description" name="description" rows="5" placeholder="Describe the car, comfort, safety, and driving experience." required></textarea>
+            </div>
+          </div>
+
+          <button class="btn btn-primary px-4 mt-4" type="submit">
+            <i class="bi bi-plus-circle me-1"></i>Add Car
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<%- include('../../partials/footer') %>

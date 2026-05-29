@@ -1,0 +1,62 @@
+<%- include('../../partials/header') %>
+
+<section class="owner-shell">
+  <div class="container-fluid px-0">
+    <div class="d-flex">
+      <%- include('../../partials/owner-sidebar') %>
+
+      <div class="owner-content">
+        <div class="owner-heading">
+          <h1>Manage Cars</h1>
+          <p>View all listed cars, update availability, or remove them from the booking platform.</p>
+        </div>
+
+        <div class="owner-table-wrap">
+          <table class="table owner-table align-middle mb-0">
+            <thead>
+              <tr>
+                <th>Car</th>
+                <th class="d-none d-md-table-cell">Category</th>
+                <th>Price</th>
+                <th class="d-none d-lg-table-cell">Status</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% cars.forEach((car) => { %>
+                <tr>
+                  <td>
+                    <div class="table-car">
+                      <img src="<%= car.image %>" alt="<%= car.brand %> <%= car.model %>">
+                      <div>
+                        <strong><%= car.brand %> <%= car.model %></strong>
+                        <span><%= car.seating_capacity %> seats &bull; <%= car.transmission %></span>
+                      </div>
+                    </div>
+                  </td>
+                  <td class="d-none d-md-table-cell"><%= car.category %></td>
+                  <td><%= helpers.formatMoney(car.pricePerDay) %>/day</td>
+                  <td class="d-none d-lg-table-cell">
+                    <span class="badge <%= car.isAvaliable ? 'text-bg-success' : 'text-bg-secondary' %>"><%= car.isAvaliable ? 'Available' : 'Unavailable' %></span>
+                  </td>
+                  <td>
+                    <div class="table-actions">
+                      <button class="icon-action" type="button" data-toggle-car="<%= car.id %>" title="Toggle availability" aria-label="Toggle availability">
+                        <i class="bi <%= car.isAvaliable ? 'bi-eye-slash' : 'bi-eye' %>"></i>
+                      </button>
+                      <button class="icon-action danger" type="button" data-delete-car="<%= car.id %>" title="Delete car" aria-label="Delete car">
+                        <i class="bi bi-trash3"></i>
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+              <% }) %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<%- include('../../partials/footer') %>

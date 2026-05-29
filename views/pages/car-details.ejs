@@ -1,0 +1,58 @@
+<%- include('../partials/header') %>
+
+<section class="section-pad car-detail-section">
+  <div class="container">
+    <a class="back-link" href="/cars"><i class="bi bi-arrow-left"></i>Back to all cars</a>
+
+    <div class="row g-5 align-items-start mt-3">
+      <div class="col-lg-8">
+        <img class="detail-image" src="<%= car.image %>" alt="<%= car.brand %> <%= car.model %>">
+
+        <div class="detail-content">
+          <h1><%= car.brand %> <%= car.model %></h1>
+          <p class="lead text-secondary"><%= car.category %> &bull; <%= car.year %></p>
+          <hr>
+
+          <div class="detail-meta-grid">
+            <div><i class="bi bi-people"></i><span><%= car.seating_capacity %> Seats</span></div>
+            <div><i class="bi bi-fuel-pump"></i><span><%= car.fuel_type %></span></div>
+            <div><i class="bi bi-car-front"></i><span><%= car.transmission %></span></div>
+            <div><i class="bi bi-geo-alt"></i><span><%= car.location %></span></div>
+          </div>
+
+          <h2>Description</h2>
+          <p class="text-secondary"><%= car.description %></p>
+
+          <h2>Features</h2>
+          <ul class="feature-list">
+            <li><i class="bi bi-check2-circle"></i>360 Camera</li>
+            <li><i class="bi bi-check2-circle"></i>Bluetooth</li>
+            <li><i class="bi bi-check2-circle"></i>GPS</li>
+            <li><i class="bi bi-check2-circle"></i>Heated Seats</li>
+            <li><i class="bi bi-check2-circle"></i>Rear View Mirror</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="col-lg-4">
+        <form class="booking-card" data-booking-form>
+          <input type="hidden" name="carId" value="<%= car.id %>">
+          <p class="booking-price"><strong><%= helpers.formatMoney(car.pricePerDay) %></strong><span>per day</span></p>
+          <hr>
+          <div class="mb-3">
+            <label class="form-label" for="detailPickup">Pickup Date</label>
+            <input class="form-control" id="detailPickup" type="date" name="pickupDate" min="<%= helpers.todayInput() %>" required>
+          </div>
+          <div class="mb-4">
+            <label class="form-label" for="detailReturn">Return Date</label>
+            <input class="form-control" id="detailReturn" type="date" name="returnDate" min="<%= helpers.todayInput() %>" required>
+          </div>
+          <button class="btn btn-primary w-100 py-3" type="submit">Book Now</button>
+          <p class="text-center text-secondary small mb-0 mt-3">No credit card required to reserve</p>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<%- include('../partials/footer') %>

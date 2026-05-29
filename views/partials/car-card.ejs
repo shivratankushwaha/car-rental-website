@@ -1,0 +1,23 @@
+<article class="car-card h-100">
+  <a href="/car-details/<%= car.id %>" class="text-decoration-none text-reset">
+    <div class="car-card-image">
+      <img src="<%= car.image %>" alt="<%= car.brand %> <%= car.model %>" loading="lazy">
+      <% if (car.isAvaliable) { %>
+        <span class="availability-badge">Available Now</span>
+      <% } else { %>
+        <span class="availability-badge unavailable">Unavailable</span>
+      <% } %>
+      <span class="price-badge"><strong><%= helpers.formatMoney(car.pricePerDay) %></strong> / day</span>
+    </div>
+    <div class="car-card-body">
+      <h3><%= car.brand %> <%= car.model %></h3>
+      <p class="text-secondary"><%= car.category %> &bull; <%= car.year %></p>
+      <div class="car-meta-grid">
+        <span><i class="bi bi-people"></i><%= car.seating_capacity %> Seats</span>
+        <span><i class="bi bi-fuel-pump"></i><%= car.fuel_type %></span>
+        <span><i class="bi bi-car-front"></i><%= car.transmission %></span>
+        <span><i class="bi bi-geo-alt"></i><%= car.location %></span>
+      </div>
+    </div>
+  </a>
+</article>

@@ -1,0 +1,126 @@
+<%- include('../partials/header') %>
+
+<section class="hero-section bg-light">
+  <div class="container">
+    <div class="hero-content text-center">
+      <h1>Luxury cars on Rent</h1>
+      <form class="hero-search" action="/cars" method="get">
+        <div class="search-field">
+          <label for="pickupLocation">Pickup Location</label>
+          <select id="pickupLocation" name="pickupLocation" aria-label="Pickup Location">
+            <option value="">Please select location</option>
+            <% locations.forEach((location) => { %>
+              <option value="<%= location %>"><%= location %></option>
+            <% }) %>
+          </select>
+        </div>
+        <div class="search-field">
+          <label for="pickupDate">Pick-up Date</label>
+          <input id="pickupDate" type="date" name="pickupDate" min="<%= helpers.todayInput() %>" aria-label="Pick-up Date">
+        </div>
+        <div class="search-field">
+          <label for="returnDate">Return Date</label>
+          <input id="returnDate" type="date" name="returnDate" min="<%= helpers.todayInput() %>" aria-label="Return Date">
+        </div>
+        <button class="btn btn-primary rounded-pill px-4" type="submit">
+          <i class="bi bi-search me-1"></i>Search
+        </button>
+      </form>
+      <img class="hero-car" src="<%= assets.mainCar %>" alt="Silver luxury sedan">
+    </div>
+  </div>
+</section>
+
+<section class="section-pad">
+  <div class="container">
+    <div class="section-heading text-center mx-auto">
+      <h2>Featured Vehicles</h2>
+      <p>Explore our selection of premium vehicles available for your next adventure.</p>
+    </div>
+
+    <div class="row g-4 mt-4">
+      <% cars.forEach((car) => { %>
+        <div class="col-md-6 col-xl-4">
+          <%- include('../partials/car-card', { car }) %>
+        </div>
+      <% }) %>
+    </div>
+
+    <div class="text-center mt-5">
+      <a class="btn btn-outline-secondary px-4" href="/cars">
+        Explore all cars <i class="bi bi-arrow-right ms-1"></i>
+      </a>
+    </div>
+  </div>
+</section>
+
+<section class="owner-cta">
+  <div class="container">
+    <div class="owner-cta-panel">
+      <div>
+        <h2>Do You Own a Luxury Car?</h2>
+        <p>Monetize your vehicle effortlessly by listing it on CarRental.</p>
+        <p>We take care of insurance, driver verification and secure payments so you can earn passive income, stress-free.</p>
+        <a class="btn btn-light text-primary px-4" href="<%= currentUser ? '/owner/start' : '/?login=1' %>">List your car</a>
+      </div>
+      <img src="<%= assets.bannerCar %>" alt="Blue luxury car">
+    </div>
+  </div>
+</section>
+
+<section class="section-pad">
+  <div class="container">
+    <div class="section-heading text-center mx-auto">
+      <h2>What Our Customers Say</h2>
+      <p>Discover why discerning travelers choose CarRental for smooth, premium drives around the world.</p>
+    </div>
+
+    <div class="row g-4 mt-4">
+      <div class="col-md-6 col-xl-4">
+        <article class="testimonial-card">
+          <div class="d-flex align-items-center gap-3 mb-3">
+            <img src="<%= assets.testimonialOne %>" alt="Emma Rodriguez">
+            <div><strong>Emma Rodriguez</strong><span>Barcelona, Spain</span></div>
+          </div>
+          <div class="stars" aria-label="5 stars"><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i></div>
+          <p>"I've rented cars from various companies, but the experience with CarRental was exceptional."</p>
+        </article>
+      </div>
+      <div class="col-md-6 col-xl-4">
+        <article class="testimonial-card">
+          <div class="d-flex align-items-center gap-3 mb-3">
+            <img src="<%= assets.testimonialTwo %>" alt="John Smith">
+            <div><strong>John Smith</strong><span>New York, USA</span></div>
+          </div>
+          <div class="stars" aria-label="5 stars"><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i></div>
+          <p>"CarRental made my trip so much easier. The car was delivered right to my door, and the customer service was fantastic!"</p>
+        </article>
+      </div>
+      <div class="col-md-6 col-xl-4">
+        <article class="testimonial-card">
+          <div class="d-flex align-items-center gap-3 mb-3">
+            <img src="<%= assets.testimonialOne %>" alt="Ava Johnson">
+            <div><strong>Ava Johnson</strong><span>Sydney, Australia</span></div>
+          </div>
+          <div class="stars" aria-label="5 stars"><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i></div>
+          <p>"I highly recommend CarRental! Their fleet is amazing, and I always feel like I'm getting the best deal with excellent service."</p>
+        </article>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="newsletter-section">
+  <div class="container">
+    <div class="newsletter-panel text-center">
+      <h2>Never Miss a Deal!</h2>
+      <p>Subscribe to get the latest offers, new arrivals, and exclusive discounts</p>
+      <form class="newsletter-form" data-newsletter-form>
+        <input type="email" name="email" placeholder="Enter your email id" aria-label="Email address" required>
+        <button class="btn btn-primary" type="submit">Subscribe</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<%- include('../partials/footer') %>

@@ -1,0 +1,47 @@
+<%- include('../partials/header') %>
+
+<section class="section-pad bookings-section">
+  <div class="container">
+    <div class="page-heading">
+      <h1>My Bookings</h1>
+      <p>View and manage your all car bookings</p>
+    </div>
+
+    <% if (bookings.length) { %>
+      <div class="booking-list">
+        <% bookings.forEach((booking, index) => { %>
+          <article class="booking-item">
+            <div class="booking-index"><%= index + 1 %></div>
+            <img src="<%= booking.car.image %>" alt="<%= booking.car.brand %> <%= booking.car.model %>">
+            <div class="booking-main">
+              <div class="d-flex flex-column flex-lg-row justify-content-between gap-3">
+                <div>
+                  <h2><%= booking.car.brand %> <%= booking.car.model %></h2>
+                  <p><%= booking.car.category %> &bull; <%= booking.car.year %> &bull; <%= booking.car.location %></p>
+                </div>
+                <div class="text-lg-end">
+                  <span class="badge <%= helpers.statusClass(booking.status) %> text-capitalize"><%= booking.status %></span>
+                  <p class="booking-total mt-2 mb-0"><%= helpers.formatMoney(booking.price) %></p>
+                </div>
+              </div>
+              <div class="booking-dates">
+                <span><i class="bi bi-calendar-event"></i><%= helpers.formatDate(booking.pickupDate) %></span>
+                <span><i class="bi bi-arrow-right"></i><%= helpers.formatDate(booking.returnDate) %></span>
+                <span><i class="bi bi-credit-card"></i><%= booking.paymentStatus %></span>
+              </div>
+            </div>
+          </article>
+        <% }) %>
+      </div>
+    <% } else { %>
+      <div class="empty-state">
+        <i class="bi bi-calendar2-x"></i>
+        <h2>No bookings yet</h2>
+        <p>Your reservations will appear here after you book a car.</p>
+        <a class="btn btn-primary" href="/cars">Browse cars</a>
+      </div>
+    <% } %>
+  </div>
+</section>
+
+<%- include('../partials/footer') %>
